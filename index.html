@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Plan de Estudios I · Comunicación Social — CUC</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- VARIABLES DE DISEÑO --- */
+    :root {
+      --primary: #9e0b1c; 
+      --primary-dark: #7a0816;
+      --gold-border: #C9A227;
+      --bg: #f4f4f4;
+      --card: #ffffff;
+      --text: #333;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* --- ENCABEZADO --- */
+    header {
+      background-color: var(--primary);
+      width: 100%;
+      padding: 1.5rem 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      border-bottom: 4px solid var(--primary-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .logo-container { display: flex; align-items: center; gap: 12px; color: white; padding: 0 20px; }
+    .cuc-siglas { font-weight: 900; font-size: 3.5rem; line-height: 1; letter-spacing: -2px; }
+    .cuc-texto { display: flex; flex-direction: column; border-left: 1px solid rgba(255,255,255,0.3); padding-left: 12px; }
+    .cuc-texto span { font-weight: 300; font-size: 1.2rem; line-height: 1; text-transform: uppercase; letter-spacing: 1px; }
+
+    .container { width: 90%; max-width: 1200px; margin: 0 auto; flex-grow: 1; padding-bottom: 40px; }
+
+    /* --- HÉROE --- */
+    .hero { text-align: center; margin-bottom: 40px; }
+    
+    .hero h1 { 
+        color: var(--primary); 
+        text-transform: uppercase; 
+        font-weight: 900; 
+        letter-spacing: -1px; 
+        font-size: 2.5rem; 
+        margin: 0; 
+        line-height: 1.1;
+    }
+    
+    .hero h2 {
+        color: #333;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 1.2rem;
+        margin: 5px 0 15px 0;
+        letter-spacing: 0.5px;
+    }
+
+    .hero p { color: #666; font-weight: 400; font-size: 1rem; }
+
+    /* --- SEMESTRES --- */
+    .semestres { 
+      display: grid; 
+      grid-template-columns: repeat(5, 1fr); 
+      gap: 12px; 
+      margin-bottom: 30px; 
+    }
+
+    @media (max-width: 768px) {
+        .semestres { grid-template-columns: repeat(2, 1fr); }
+        .cuc-siglas { font-size: 2.5rem; }
+        .cuc-texto span { font-size: 1rem; }
+        .hero h1 { font-size: 2rem; }
+    }
+
+    .sem-btn {
+      padding: 15px 5px;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70px; 
+      user-select: none;
+    }
+
+    .sem-btn strong { display: block; font-size: 0.9rem; margin-bottom: 4px; color: #333; font-weight: 800; text-transform: uppercase; }
+    .sem-btn span { font-size: 0.75rem; color: #777; font-weight: 500; }
+
+    .sem-btn:hover { transform: translateY(-3px); border-color: var(--primary); }
+    .sem-btn:hover strong { color: var(--primary); }
+    
+    .sem-btn.active { background: var(--primary); border-color: var(--primary); box-shadow: 0 4px 10px rgba(158, 11, 28, 0.4); }
+    .sem-btn.active strong { color: #fff; }
+    .sem-btn.active span { color: rgba(255,255,255,0.9); }
+
+    /* --- LAYOUT Y TARJETAS --- */
+    .layout { display: grid; grid-template-columns: 320px 1fr; gap: 25px; margin-bottom: 30px; }
+    .card { background: var(--card); border-radius: var(--radius); padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee; }
+    
+    aside.card { border-top: 5px solid var(--primary); height: fit-content; position: sticky; top: 20px; }
+    
+    #curso-title { color: var(--primary); margin: 5px 0 15px 0; font-size: 1.4rem; font-weight: 800; text-transform: uppercase; line-height: 1.2; }
+
+    /* Grid Malla */
+    .grid-malla { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 15px; }
+    
+    .malla-card { 
+        border: 1px solid #eee; 
+        padding: 20px 15px; 
+        border-radius: var(--radius); 
+        cursor: pointer; 
+        transition: all 0.2s ease; 
+        background: #fafafa; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 110px; 
+        position: relative;
+    }
+    .malla-card:hover { background: white; box-shadow: 0 8px 20px rgba(0,0,0,0.08); border-color: var(--primary); transform: translateY(-3px); }
+    .malla-card strong { color: #333; font-size: 0.8rem; line-height: 1.35; font-weight: 700; text-transform: uppercase; }
+
+    /* Prerrequisitos List */
+    .req-list { list-style: none; padding: 0; margin-top: 15px; background: #fff; border-radius: 8px; border: 1px solid #eee; overflow: hidden; }
+    .req-list li { padding: 12px 15px; font-size: 0.85rem; line-height: 1.4; color: #444; border-bottom: 1px solid #f0f0f0; display: flex; flex-direction: column; }
+    .req-list li:last-child { border-bottom: none; }
+    .req-name { font-weight: 700; color: #333; }
+    .req-semestre { color: var(--primary); font-size: 0.7rem; font-weight: 700; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Botón Regresar */
+    .btn-back-container { margin-top: 40px; text-align: center; width: 100%; display: flex; justify-content: center; }
+    .btn-back { 
+        background-color: transparent; border: 2px solid var(--primary); color: var(--primary); 
+        padding: 12px 50px; font-size: 0.95rem; border-radius: 50px; cursor: pointer; 
+        transition: all 0.3s ease; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; 
+        text-decoration: none; display: inline-block; 
+    }
+    .btn-back:hover { background-color: var(--primary); color: white; box-shadow: 0 5px 15px rgba(158, 11, 28, 0.3); }
+
+    /* --- FOOTER --- */
+    footer { background-color: #000000; width: 100%; padding: 1.5rem 0; margin-top: auto; color: white; border-top: 3px solid #222; }
+    .footer-content { width: 90%; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: flex-start; gap: 15px; }
+    .copyright-icon { font-size: 2rem; color: #666; line-height: 1; }
+    .dev-info { display: flex; flex-direction: column; line-height: 1.3; }
+    .dev-title { font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; color: #888; text-transform: uppercase; margin-bottom: 2px; }
+    .dev-name { font-size: 0.9rem; font-weight: 600; color: #fff; }
+    .dev-year { font-size: 0.7rem; color: #666; }
+
+    @media(max-width:900px){ .layout { grid-template-columns:1fr; } aside.card { position: static; } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+        <div class="cuc-siglas">CUC</div>
+        <div class="cuc-texto">
+            <span class="linea-1">Universidad</span>
+            <span>de la Costa</span>
+        </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>PLAN DE ESTUDIOS I</h1>
+      <h2>COMUNICACIÓN SOCIAL Y MEDIOS DIGITALES</h2>
+      <p>Seleccione un semestre para visualizar las asignaturas y sus prerrequisitos.</p>
+    </section>
+
+    <section class="semestres" aria-label="Semestres"></section>
+
+    <div class="layout">
+      <aside class="card">
+        <h3 style="color:#888; font-size:0.75rem; text-transform:uppercase; margin-bottom:10px; letter-spacing:1px; border-bottom:2px solid var(--primary); display:inline-block; padding-bottom:5px; font-weight: 700;">Detalles de la Asignatura</h3>
+        
+        <h2 id="curso-title">SELECCIONA UN CURSO</h2>
+        
+        <div id="curso-meta" style="margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+            <p style="font-size: 0.9rem; color: #888; font-style: italic;">Haga clic en una materia de la malla para ver sus requisitos aquí.</p>
+        </div>
+        
+        <div id="curso-desc" style="font-size:0.9rem; color:#444; line-height: 1.6;"></div>
+      </aside>
+
+      <section>
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="margin-bottom: 25px; color: var(--primary); font-weight: 800; text-transform: uppercase; font-size: 1.1rem;">Asignaturas del Semestre</h3>
+          <div class="grid-malla" id="malla" aria-live="polite"></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="btn-back-container">
+        <a href="https://fchys.github.io/menu-academico-cuc/" class="btn-back">VOLVER AL INICIO</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-content">
+        <div class="copyright-icon">©</div>
+        <div class="dev-info">
+            <span class="dev-title">DESARROLLO E IMPLEMENTACIÓN</span>
+            <span class="dev-name">Carlos Rodríguez | Álvaro Romero</span>
+            <span class="dev-year">2025 · Derechos Reservados</span>
+        </div>
+    </div>
+  </footer>
+
+  <script>
+    /* BASE DE DATOS DE ASIGNATURAS - PENSUM I (CORREGIDO) */
+    const cursos = [
+      // NIVEL 1
+      {curso:'LENGUAJE SONORO', codigo:'54001', creditos:3, tipo:'Teórico-Práctica', nivel:1, descripcion:''},
+      {curso:'TEORIA DE LA IMAGEN', codigo:'CI001', creditos:3, tipo:'Teórico-Práctica', nivel:1, descripcion:''},
+      {curso:'ECOSISTEMA MEDIATICO', codigo:'CI002', creditos:3, tipo:'Teórica', nivel:1, descripcion:''},
+      {curso:'MODERNIDAD CONTEMPORANEA', codigo:'CI003', creditos:3, tipo:'Teórica', nivel:1, descripcion:''},
+      {curso:'ELECTIVA DE HUMANIDADES I', codigo:'CI004', creditos:3, tipo:'Teórica', nivel:1, descripcion:''},
+      {curso:'BIVE I', codigo:'CI005', creditos:1, tipo:'Teórica', nivel:1, descripcion:''},
+
+      // NIVEL 2
+      {curso:'CONTENIDOS DIGITALES Y REDES SOCIALES', codigo:'54016', creditos:3, tipo:'Teórico-Práctica', nivel:2, descripcion:''},
+      {curso:'REDACCION COMUNICATIVA I', codigo:'CI006', creditos:3, tipo:'Teórico-Práctica', nivel:2, descripcion:'Prerrequisito: ELECTIVA DE HUMANIDADES I (CI004).'},
+      {curso:'FOTOGRAFIA DIGITAL', codigo:'CI007', creditos:3, tipo:'Teórico-Práctica', nivel:2, descripcion:'Prerrequisito: TEORIA DE LA IMAGEN (CI001).'},
+      {curso:'PENSAMIENTO COMUNICACIONAL', codigo:'CI008', creditos:3, tipo:'Teórica', nivel:2, descripcion:''},
+      {curso:'IMPACTO SOCIOCULTURAL DE LAS TIC', codigo:'CI009', creditos:3, tipo:'Teórica', nivel:2, descripcion:''},
+      {curso:'BIVE II', codigo:'CI010', creditos:1, tipo:'Teórica', nivel:2, descripcion:'Prerrequisito: BIVE I (CI005).'},
+
+      // NIVEL 3
+      {curso:'PENSAMIENTO COMUNICACIONAL LATINOAMERICANO', codigo:'54012', creditos:3, tipo:'Teórica', nivel:3, descripcion:'Prerrequisito: PENSAMIENTO COMUNICACIONAL (CI008).'},
+      {curso:'REDACCION COMUNICATIVA II', codigo:'CI011', creditos:3, tipo:'Teórico-Práctica', nivel:3, descripcion:'Prerrequisito: REDACCION COMUNICATIVA I (CI006).'},
+      {curso:'PRODUCCION I: RTV', codigo:'CI012', creditos:3, tipo:'Teórico-Práctica', nivel:3, descripcion:'Prerrequisito: FOTOGRAFIA DIGITAL (CI007).'},
+      {curso:'MERCADEO', codigo:'CI013', creditos:3, tipo:'Teórico-Práctica', nivel:3, descripcion:''},
+      {curso:'ELECTIVA DE HUMANIDADES II', codigo:'CI014', creditos:3, tipo:'Teórica', nivel:3, descripcion:''},
+      {curso:'BIVE III', codigo:'CI015', creditos:1, tipo:'Teórica', nivel:3, descripcion:'Prerrequisito: BIVE I (CI005), BIVE II (CI010).'},
+
+      // NIVEL 4
+      {curso:'ELECTIVA DE HUMANIDADES III', codigo:'CI016', creditos:3, tipo:'Teórica', nivel:4, descripcion:''},
+      {curso:'PRODUCCION II: POST-PRODUCCION', codigo:'CI017', creditos:3, tipo:'Teórico-Práctica', nivel:4, descripcion:'Prerrequisito: PRODUCCION I: RTV (CI012).'},
+      {curso:'INVESTIGACION EN COMUNICACION I', codigo:'CI018', creditos:3, tipo:'Teórica', nivel:4, descripcion:''},
+      {curso:'COMUNICACION ORGANIZACIONAL I', codigo:'CI019', creditos:3, tipo:'Teórico-Práctica', nivel:4, descripcion:''},
+      {curso:'ESTADISTICA BASICA', codigo:'CI020', creditos:3, tipo:'Teórico-Práctica', nivel:4, descripcion:''},
+      {curso:'BIVE IV', codigo:'CI021', creditos:1, tipo:'Teórica', nivel:4, descripcion:'Prerrequisito: BIVE I (CI005), BIVE II (CI010), BIVE III (CI015).'},
+
+      // NIVEL 5
+      {curso:'COMUNICACION PARA EL DESARROLLO', codigo:'CI022', creditos:3, tipo:'Teórica', nivel:5, descripcion:''},
+      {curso:'PRODUCCION III: DOCUMENTAL', codigo:'CI023', creditos:3, tipo:'Teórico-Práctica', nivel:5, descripcion:'Prerrequisito: PRODUCCION I: RTV (CI012), PRODUCCION II: POST-PRODUCCION (CI017).'},
+      {curso:'INVESTIGACION EN COMUNICACION II', codigo:'CI024', creditos:3, tipo:'Teórica', nivel:5, descripcion:'Prerrequisito: INVESTIGACION EN COMUNICACION I (CI018).'},
+      {curso:'COMUNICACION ORGANIZACIONAL II', codigo:'CI025', creditos:3, tipo:'Teórico-Práctica', nivel:5, descripcion:'Prerrequisito: COMUNICACION ORGANIZACIONAL I (CI019).'},
+      {curso:'SUFICIENCIA SEGUNDO IDIOMA I', codigo:'CI026', creditos:3, tipo:'Teórica', nivel:5, descripcion:''},
+      {curso:'ELECTIVA GERENCIAL I', codigo:'CI027', creditos:3, tipo:'Teórica', nivel:5, descripcion:''},
+
+      // NIVEL 6
+      {curso:'MEDIOS Y LEYES', codigo:'CI028', creditos:3, tipo:'Teórico-Práctica', nivel:6, descripcion:''},
+      {curso:'MARKETING DIGITAL', codigo:'CI029', creditos:3, tipo:'Teórico-Práctica', nivel:6, descripcion:'Prerrequisito: CONTENIDOS DIGITALES Y REDES SOCIALES (54016).'},
+      {curso:'COMUNICACION Y CULTURA', codigo:'CI030', creditos:3, tipo:'Teórica', nivel:6, descripcion:''},
+      {curso:'SOSTENIBILIDAD Y COMUNICACION', codigo:'CI031', creditos:3, tipo:'Teórico-Práctica', nivel:6, descripcion:'Prerrequisito: COMUNICACION ORGANIZACIONAL II (CI025).'},
+      {curso:'SUFICIENCIA SEGUNDO IDIOMA II', codigo:'CI032', creditos:3, tipo:'Teórica', nivel:6, descripcion:'Prerrequisito: SUFICIENCIA SEGUNDO IDIOMA I (CI026).'},
+      {curso:'ELECTIVA GERENCIAL II', codigo:'CI033', creditos:3, tipo:'Teórica', nivel:6, descripcion:''},
+
+      // NIVEL 7
+      {curso:'PERIODISMO TRANSMEDIA', codigo:'CI034', creditos:3, tipo:'Teórico-Práctica', nivel:7, descripcion:''},
+      {curso:'ECONOMIA POLITICA DE LA INFORMACION', codigo:'CI035', creditos:3, tipo:'Teórico-Práctica', nivel:7, descripcion:''},
+      {curso:'SEMIOTICA Y ANALISIS DEL LENGUAJE DIGITAL', codigo:'CI036', creditos:3, tipo:'Teórico-Práctica', nivel:7, descripcion:''},
+      {curso:'LOBBY Y RELACIONES PUBLICAS', codigo:'CI037', creditos:3, tipo:'Teórico-Práctica', nivel:7, descripcion:'Prerrequisito: SOSTENIBILIDAD Y COMUNICACION (CI031).'},
+      {curso:'SUFICIENCIA SEGUNDO IDIOMA III', codigo:'CI038', creditos:3, tipo:'Teórica', nivel:7, descripcion:'Prerrequisito: SUFICIENCIA SEGUNDO IDIOMA I (CI026), SUFICIENCIA SEGUNDO IDIOMA II (CI032).'},
+      {curso:'ELECTIVA GERENCIAL III', codigo:'CI039', creditos:3, tipo:'Teórica', nivel:7, descripcion:''},
+
+      // NIVEL 8
+      {curso:'ELECTIVA DE PROFUNDIZACION I', codigo:'CI040', creditos:3, tipo:'Teórico-Práctica', nivel:8, descripcion:''},
+      {curso:'ELECTIVA DE PROFUNDIZACION II', codigo:'CI041', creditos:3, tipo:'Teórico-Práctica', nivel:8, descripcion:''},
+      {curso:'ELECTIVA DE PROFUNDIZACION III', codigo:'CI042', creditos:3, tipo:'Teórico-Práctica', nivel:8, descripcion:''},
+      {curso:'ELECTIVA DE PROFUNDIZACION IV', codigo:'CI043', creditos:3, tipo:'Teórico-Práctica', nivel:8, descripcion:''},
+      {curso:'ELECTIVA GERENCIAL IV', codigo:'CI044', creditos:3, tipo:'Teórica', nivel:8, descripcion:''},
+
+      // NIVEL 9
+      {curso:'OPCION DE GRADO I', codigo:'CI045', creditos:9, tipo:'Teórico-Práctica', nivel:9, descripcion:''},
+
+      // NIVEL 10
+      {curso:'OPCION DE GRADO II', codigo:'CI046', creditos:3, tipo:'Teórico-Práctica', nivel:10, descripcion:''},
+      {curso:'PRACTICAS PROFESIONALES', codigo:'CI047', creditos:12, tipo:'Práctica', nivel:10, descripcion:'Prerrequisito: Haber cursado y aprobado todas las asignaturas de 1° a 9° semestre.'}
+    ];
+
+    /* --- LÓGICA DE VISUALIZACIÓN --- */
+    const semestresDiv = document.querySelector('.semestres');
+    
+    // 1. Generar botones de semestres
+    for(let s=1; s<=10; s++){
+      const total = cursos.filter(c => c.nivel === s).reduce((a,b) => a + b.creditos, 0);
+      const div = document.createElement('div');
+      div.className = 'sem-btn';
+      div.dataset.sem = s;
+      div.innerHTML = `<strong>SEMESTRE ${s}</strong><span>${total} créditos</span>`;
+      semestresDiv.appendChild(div);
+    }
+
+    const malla = document.getElementById('malla');
+    const title = document.getElementById('curso-title');
+    const meta = document.getElementById('curso-meta');
+    const desc = document.getElementById('curso-desc');
+
+    // 2. Función para mostrar la malla de un semestre
+    function renderMalla(sem){
+      malla.innerHTML = '';
+      const cursosSemestre = cursos.filter(c => c.nivel === sem);
+      
+      if(cursosSemestre.length === 0) {
+          malla.innerHTML = '<p style="color:#888; grid-column: 1/-1; text-align:center;">No hay asignaturas registradas.</p>';
+          return;
+      }
+
+      cursosSemestre.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'malla-card';
+        card.dataset.codigo = c.codigo;
+        
+        // Detectar si tiene prerrequisitos para el estilo
+        const descLower = c.descripcion ? c.descripcion.toLowerCase() : '';
+        const hasReq = descLower.includes('prerrequisito') && !descLower.includes('ninguno');
+        
+        if(hasReq){ 
+            card.style.borderLeft = '4px solid var(--gold-border)'; 
+            card.style.background = '#fff'; 
+        }
+        
+        card.innerHTML = `
+            <strong>${c.curso}</strong>
+            ${hasReq ? '<div style="margin-top:8px; font-size:0.65rem; color:#b58900; font-weight:700;">⚠️ Prerrequisito</div>' : ''}
+        `;
+        
+        card.onclick = () => showCourse(c);
+        malla.appendChild(card);
+      });
+    }
+
+    // 3. Función para mostrar detalles (Panel Lateral)
+    function showCourse(c){
+      title.textContent = c.curso;
+      meta.innerHTML = `
+        <div style='display:flex; justify-content:space-between; align-items:center; width:100%; margin-top:10px;'>
+            <span style="font-weight:600; color:#555;">Código: ${c.codigo}</span>
+            <span style='background:var(--primary); color:white; padding:5px 12px; border-radius:50px; font-size:0.75rem; font-weight:700; text-transform:uppercase;'>
+                ${c.creditos} Créditos
+            </span>
+        </div>`;
+
+      const descLower = c.descripcion ? c.descripcion.toLowerCase() : '';
+
+      // Si tiene prerrequisitos
+      if (descLower.includes('prerrequisito') && !descLower.includes('ninguno')) {
+          let rawText = c.descripcion.replace(/Prerrequisito(s)?:/i, '').trim();
+          
+          // Separar por comas
+          let reqArray = rawText.split(',');
+
+          let listHtml = '<ul class="req-list">';
+          reqArray.forEach(reqName => {
+              let cleanName = reqName.trim();
+              // Limpiar paréntesis extras si los hay
+              let nameForSearch = cleanName.split('(')[0].trim();
+              
+              // Buscar la materia requisito para saber su semestre
+              let found = cursos.find(x => x.curso === nameForSearch);
+              let semLabel = found ? `(Semestre ${found.nivel})` : '';
+
+              listHtml += `<li><span class="req-name">${nameForSearch}</span> <span class="req-semestre">${semLabel}</span></li>`;
+          });
+          listHtml += '</ul>';
+
+          desc.innerHTML = `<strong style="color:var(--primary); display:block; margin-bottom:8px; text-transform:uppercase; font-size:0.75rem; font-weight:800;">Requisitos para cursar:</strong>${listHtml}`;
+      } else {
+          // Si no tiene requisitos
+          desc.innerHTML = '<div style="padding:15px; background:#eefaf0; border:1px solid #c3e6cb; border-radius:8px; color:#155724; font-size:0.85rem; font-weight:600;">✅ Esta asignatura no tiene prerrequisitos registrados.</div>';
+      }
+    }
+
+    // 4. Inicializar eventos de clic en los semestres
+    document.querySelectorAll('.sem-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.sem-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderMalla(parseInt(btn.dataset.sem));
+      });
+    });
+
+    // 5. Cargar Semestre 1 por defecto al iniciar
+    renderMalla(1);
+    document.querySelector('.sem-btn[data-sem="1"]').classList.add('active');
+  </script>
+</body>
+</html>
